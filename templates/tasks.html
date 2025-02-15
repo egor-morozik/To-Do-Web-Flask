@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<form method="POST">
+    {{ form.hidden_tag() }}
+    {{ form.title.label }} {{ form.title() }}
+    {{ form.submit() }}
+</form>
+
+<ul>
+    {% for task in tasks %}
+    <li>
+        {{ task.title }} - {{ "✅" if task.completed else "❌" }}
+        <a href="{{ url_for('complete_task', task_id=task.id) }}">Выполнить</a>
+        <a href="{{ url_for('delete_task', task_id=task.id) }}">Удалить</a>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
+
